@@ -26,6 +26,15 @@ jobs:
       - name: Build project
         run: dotnet build --configuration Release
         
+  check_directory:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check current directory
+        run: echo "Current directory is $(pwd)"
+      - name: ls this bich
+        run: ls
+        
   test:
     name: Test
     runs-on: ubuntu-latest
