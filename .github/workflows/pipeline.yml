@@ -30,6 +30,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
       - name: Check current directory
         run: echo "Current directory is $(pwd)"
       - name: ls this bich
@@ -41,6 +43,9 @@ jobs:
     needs: build
     
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
       - name: Run unit tests
         uses: zyborg/dotnet-tests-report@v1
         with:
