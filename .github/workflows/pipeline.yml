@@ -26,14 +26,20 @@ jobs:
       - name: Build project
         run: dotnet build --configuration Release
         
-      - name: Run tests
-        run: dotnet test --logger trx --results-directory "TestResults"
-        
-      - name: Test Reports
-        uses: actions/upload-artifact@v2  # upload test results
-        if: success() || failure()        # run this step even if previous step failed
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - name: Run unit tests
+        uses: zyborg/dotnet-tests-report@v1
         with:
-          name: test-results
-          path: TestResults/*.trx
-          reporter: dotnet-trx
+          project_path: DeckManager.Test
+          report_name: deck_manager_tests
+          report_title: Deck Manager Tests
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          gist_name: deck_manager_tests.md
+          gist_badge_label: 'Deck Manager: %Counters_passed%/%Counters_total%'
+          gist_token: ${{ secrets.GIST_TOKEN }}
 
