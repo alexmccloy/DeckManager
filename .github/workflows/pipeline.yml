@@ -33,7 +33,7 @@ jobs:
       - name: Check current directory
         run: echo "Current directory is $(pwd)"
       - name: ls this bich
-        run: ls
+        run: ls -la
         
   test:
     name: Test
