@@ -49,7 +49,7 @@ jobs:
       - name: Run unit tests
         uses: zyborg/dotnet-tests-report@v1
         with:
-          project_path: ${GITHUB_WORKSPACE}/Amccloy.DeckManager/DeckManager.Test
+          project_path: Amccloy.DeckManager
           report_name: deck_manager_tests
           report_title: Deck Manager Tests
           github_token: ${{ secrets.GITHUB_TOKEN }}
