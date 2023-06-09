@@ -35,7 +35,7 @@ jobs:
       - name: Run unit tests
         uses: zyborg/dotnet-tests-report@v1
         with:
-          project_path: DeckManager.Test
+          project_path: ./
           report_name: deck_manager_tests
           report_title: Deck Manager Tests
           github_token: ${{ secrets.GITHUB_TOKEN }}
