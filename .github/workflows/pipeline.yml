@@ -26,12 +26,6 @@ jobs:
       - name: Build project
         run: dotnet build --configuration Release
 
-      - name: Save build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: Build Artifacts
-          path: ./build-output
-
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -54,17 +48,13 @@ jobs:
       - name: Build project
         run: dotnet build --configuration Release
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: Build Artifacts
-          path: ./build-output
-
       - name: Run tests
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet test --no-restore --verbosity normal --results-directory "TestResults"
 
       - name: Upload test artifacts
         uses: actions/upload-artifact@v2
         with:
           name: Test Results
           path: TestResults
+        # Use always() to always run this step to publish test results when there are test failures
+        if: ${{ always() }}
